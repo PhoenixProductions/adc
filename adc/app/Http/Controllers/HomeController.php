@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Repositories\PilotRepository;
 
 class HomeController extends Controller
 {
+	protected $pilots;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PilotRepository $pilots)
     {
         $this->middleware('auth');
+		$this->pilots = $pilots;
     }
 
     /**
@@ -24,10 +27,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-		$session = $request->session();
-		$pilotname = $session->has('activepilot') ? $session->get('activepilot')->name: '';
+		$pilot = $this->pilots->currentPilot($request->user());
         return view('home',[
-			'pilot' => $pilotname
+			'pilot' => $pilot
 		]);
     }
 }

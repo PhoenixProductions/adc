@@ -58,7 +58,7 @@ class PilotController extends Controller
 		$user = $request->user();
 		$this->authorize('switchToPilot', $pilot);
 		$user->activepilotid = $pilot->id;
-		$request->session()->put('activepilot', $pilot);
+		$user->save();
 		return redirect('/home');
 	}
 }

@@ -13,4 +13,8 @@ class PilotRepository {
 		->orderBy('name', 'asc')
 		->get();
 	}
+	
+	public function currentPilot(User $user) {
+		return $user->pilots()->where('id', $user->activepilotid)->first();
+	}
 }
