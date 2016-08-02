@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Gate;
 use App\Http\Requests;
+use App\Pilot;
 use App\Repositories\PilotRepository;
+use Log;
+
 class PilotController extends Controller
 {
 	/**
@@ -34,16 +37,28 @@ class PilotController extends Controller
 			'name' => 'required'
 		]);
 		
-		$request->user()->pilots()->create([
+		$p = $request->user()->pilots()->create([
 			'name' => $request->name
 		]);
 		return redirect('/profile');
 	}
+	
+	public function destroy(Request $request, Pilot $pilot) {
+		$user = $request->user();
+		$this->authorize('destroy', $pilot);
+		$pilot->delete();
+		return redirect('/profile');
+	}
+	
 	public function switchpilot(Request $request) {
 		// Display list of pilots for this account
 	}
 	
-	public function setactivepilot(Request $request) {
-		
+	public function setactivepilot(Request $request, Pilot $pilot) {
+		$user = $request->user();
+		$this->authorize('switchToPilot', $pilot);
+		$user->activepilotid = $pilot->id;
+		$request->session()->put('activepilot', $pilot);
+		return redirect('/home');
 	}
 }

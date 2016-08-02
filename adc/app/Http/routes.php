@@ -23,12 +23,11 @@ Route::get('/home', 'HomeController@index');
 // Pilot Profile
 Route::get('/profile', 'PilotController@index');
 Route::post('/profile', 'PilotController@store');
-Route::delete('/profile', 'PilotController@destroy');
-
+Route::delete('/profile/{pilot}', 'PilotController@destroy');
 
 // Switch Active Polot
 Route::get('/switch', 'PilotController@switchpilot');
-Route::post('/switch', 'PilotController@setactivepilot');
+Route::post('/switch/{pilot}', 'PilotController@setactivepilot');
 Route::get('/create', 'PilotController@create');
 // User Profile
 Route::get('/user', function() {
