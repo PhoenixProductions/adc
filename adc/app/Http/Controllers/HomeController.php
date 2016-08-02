@@ -27,9 +27,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-		$pilot = $this->pilots->currentPilot($request->user());
+		//$pilot = $this->pilots->currentPilot($request->user());
         return view('home',[
-			'pilot' => $pilot
+			//'pilot' => $pilot
 		]);
     }
 }

@@ -49,7 +49,11 @@ class PilotController extends Controller
 		$pilot->delete();
 		return redirect('/profile');
 	}
-	
+	public function view(Pilot $pilot) {
+		return view('profile.view',[
+			'pilot' => $pilot
+		]);
+	}
 	public function switchpilot(Request $request) {
 		// Display list of pilots for this account
 	}

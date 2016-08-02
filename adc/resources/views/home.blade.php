@@ -11,6 +11,9 @@
                     
 					{{ Pilot::greeting() }} You are logged in!
 					
+					@unless (Pilot::current())
+					<p>You don't a have pilot on record, would you like to <a href="{{ url('/create') }}">create one</a>?</p>
+					@endunless
                 </div>
             </div>
         </div>

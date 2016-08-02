@@ -17,8 +17,9 @@
 					</thead>
 					<tbody>
 					@foreach($pilots as $pilot)
-					<tr>
-					<td><div>{{ $pilot->name }}</div></td>
+					<tr 
+					class="@if (Pilot::isCurrentPilot($pilot))active @endif">
+					<td><a href="{{ url('/profile/'.$pilot->id) }}">{{ $pilot->name }}</a></td>
 					<td>
 					<form action="{{ url('/switch/'.$pilot->id) }}" method="POST">
 					{{ csrf_field() }}<input type="submit" value="Switch To" id="switch-pilot-{{$pilot->id}}" class="btn-primary"/>

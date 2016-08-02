@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 
 // Pilot Profile
 Route::get('/profile', 'PilotController@index');
+Route::get('/profile/{pilot}', 'PilotController@view');
 Route::post('/profile', 'PilotController@store');
 Route::delete('/profile/{pilot}', 'PilotController@destroy');
 
@@ -33,4 +34,6 @@ Route::get('/create', 'PilotController@create');
 Route::get('/user', function() {
 	return view('welcome');
 });
+
+Route::get('/group','GroupController@index');
 

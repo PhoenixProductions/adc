@@ -16,4 +16,8 @@ class Pilot extends Model
 	public function user() {
 		return $this->belongsTo('App\User');
 	}
+	
+	public function groups() {
+		return $this->belongsToMany('App\Groups');
+	}
 }

@@ -59,11 +59,16 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ isset($pilot) ? $pilot->name .' ('.Auth::user()->name .')' : Auth::user()->name}}<span class="caret"></span>
+                            	@if (Pilot::current()) 
+                            		{{Pilot::current()->name}} ( {{ Auth::user()->name }} )
+                            	@else 
+                            		{{ Auth::user()->name }} 
+                            	@endif
+                                <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/switch')}}">Switch Pilot</a></li>
+								<li><a href="{{ url('/profile')}}">Switch Pilot</a></li>
 								<li><a href="{{ url('create') }}">Create Pilot</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
